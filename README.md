@@ -1,7 +1,7 @@
 KInventor Plugin
 ===================
 
-Code of Inventor Addon which was main part of my Bachelor's Thesis. 
+Code of Inventor Addon which was main part of my Bachelor's Thesis. Effect of it's work can be watched on https://db.tt/d6h0WVoC
 
 ##Thesis (in PL)
 http://sdrv.ms/1bupoA3
