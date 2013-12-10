@@ -1,0 +1,196 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:c="clr-namespace:Skowronski.Artur.Thesis"        
+        mc:Ignorable="d" 
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        x:Class="Skowronski.Artur.Thesis.MainWindow"
+        Title="MainWindow" Height="500" Width="800" >
+        <Viewbox>
+        <Grid x:Name="LayoutRoot"  Width="1280" Height="800">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="600"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="800"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.Background >
+                <ImageBrush ImageSource="/Images/noisy_grid.png" Stretch="None" TileMode="FlipX" 
+          ViewportUnits="Absolute"/>
+            </Grid.Background>
+            <Border Grid.Row="0" Grid.ColumnSpan="2">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/Background.png" Stretch="None" TileMode="FlipX"  ViewportUnits="Absolute"/>
+                </Border.Background>
+            </Border>
+            <StackPanel x:Name="Panel_Wspolrzednych"  Margin="20,0,20,10" Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                <StackPanel  Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                    <StackPanel Margin="5" Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Width="350" Margin="0" FontSize="22" FontFamily="Segoe UI Light"  x:Name="Block_left" Background="{x:Null}"  Foreground="Black"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Margin="5" Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Width="350" Margin="0" FontSize="22" FontFamily=" Segoe UI Light" x:Name="Block_right" Background="{x:Null}"  Foreground="Black"></TextBlock>
+                     </StackPanel>
+                  
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="TopBar" Grid.Row="0" Grid.Column="0">
+                <TextBox Margin="20,5" FontSize="22" FontFamily=" Segoe UI Light" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" BorderThickness="0" Background="{x:Null}" Foreground="White" IsEnabled="False" >Praca Inżynierska :: Artur Skowroński :: Automatyka i Robotyka 2009/2014</TextBox>
+            </StackPanel>
+            <StackPanel x:Name="Przyciski_Okienkowe"  Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock MouseDown="TextBox_MouseLeftButtonDown" Margin="20,5" FontSize="22" FontFamily=" Segoe UI Light" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Background="{x:Null}" Foreground="White">Zamknij</TextBlock>
+                <TextBlock MouseDown="TextBoxDrag_MouseLeftButtonDown" Margin="20,5" FontSize="22" FontFamily=" Segoe UI Light" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1"  Background="{x:Null}"  Foreground="White" >Przeciągnij</TextBlock>
+                <TextBlock  Margin="20,5" FontSize="22" FontFamily=" Segoe UI Light" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1"  Background="{x:Null}" Foreground="White">Minimalizuj</TextBlock>
+            </StackPanel>
+            <TabControl x:Name="Streams" Margin="5" SelectedIndex="0" Background="#FFDDDDDD" Grid.Row="1" Grid.Column="0">
+                <TabItem FontSize="22" Width="233" Header="Strumień Szkieletu"  Height="50"  Background="#FFDDDDDD">
+                    <c:SkeletonViewer Width="Auto" Height="Auto"  x:Name="SkeletonViewerElement"/>
+                </TabItem>
+            
+            </TabControl>
+            <StackPanel x:Name="Prawe_Menu"  Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+                <TextBlock FontSize="22" FontFamily="Segoe UI Semibold"  Width="480">Wybór urządzenia</TextBlock>
+                <StackPanel x:Name="ChooseDevice" Margin="10,10,10,0">
+                        <RadioButton FontSize="20" x:Name="Device_1" Margin="5" VerticalAlignment="Center" GroupName="ControllerGroup" Content="Inventor API" Checked="chooseDevice_Checked"  IsChecked="True"/>
+                        <RadioButton FontSize="20" x:Name="Device_2" Margin="5" VerticalAlignment="Center" GroupName="ControllerGroup" Content="Lego Mindstorms NXT (w rozwoju)" Checked="chooseDevice_Checked" IsEnabled="False" />
+                        <RadioButton FontSize="20" x:Name="Device_3" Margin="5" VerticalAlignment="Center" GroupName="ControllerGroup" Content="Arduino (w rozwoju)" Checked="chooseDevice_Checked" IsEnabled="False" />
+                </StackPanel>
+                <StackPanel x:Name="ChooseMode"  Margin="10,10,10,0">
+                    <TextBlock FontSize="22" FontFamily="Segoe UI Semibold" HorizontalAlignment="Left" Width="480">Wybór trybu</TextBlock>
+                    <StackPanel  Margin="10,5,10,10" Orientation="Horizontal">
+                        <RadioButton FontSize="20" Margin="5" VerticalAlignment="Center" GroupName="ModeGroup" Content="3D" Checked="changeMode_Click" IsChecked="True"/>
+                        <RadioButton FontSize="20" Margin="5" VerticalAlignment="Center" GroupName="ModeGroup" Content="2D" Checked="changeMode_Click"  />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="Settings" >
+                    <StackPanel>
+                        <Button Height="49.086" x:Name="createMock" FontSize="22"  Margin="5" VerticalAlignment="Center" Grid.Column="1" Click="createMock_Click" >Dodaj Domyślne (Test Drive)</Button>
+                        <StackPanel  Margin="5" Orientation="Horizontal">
+                            <Button Height="49.086" x:Name="sourceParameter" FontSize="19"  Width="230" VerticalAlignment="Center" Grid.Column="1" Click="setSource_Click" >Sterowanie Parametrem</Button>
+                            <Button Height="49.086" x:Name="sourceConstraints" FontSize="19"  Width="230" VerticalAlignment="Center" Grid.Column="1" Click="setSource_Click" Margin="10,0,0,0" >Sterowanie Wiązaniem</Button>
+                        </StackPanel>
+                        <StackPanel  Margin="5" Orientation="Horizontal">
+                            <Button Height="49" x:Name="addByParameter" FontSize="19"  Width="230" VerticalAlignment="Center" Click="addByParameter_Click" Content="Dodaj Parametr" />
+                            <Button Height="49.086" x:Name="addByConstrins" FontSize="19"  Width="230" VerticalAlignment="Center" Grid.Column="1" Click="addByConstrins_Click" Margin="10,0,0,0" Content="Dodaj Wiązanie" />
+                        </StackPanel>
+                        <Button Height="49.086" x:Name="activateDevice" FontSize="22"  Margin="5" VerticalAlignment="Center" Grid.Column="1" Click="activateDevice_Click" Content="Aktywuj Kamerę Głębi" />
+                    </StackPanel>
+                <TabControl x:Name="TabControl" Margin="5" SelectedIndex="0" Background="#FFDDDDDD" Height="272">
+                    <TabItem FontSize="22" Width="233" Header="Lista Parametrów"  Height="50"  Background="#FFDDDDDD">
+                        <ScrollViewer >
+                            <StackPanel Margin="10" x:Name="ParameterList" Background="{x:Null}">
+                        </StackPanel>
+                            </ScrollViewer >
+
+                    </TabItem>
+                    <TabItem FontSize="22"  Width="233" Header="Sterowanie Ręczne" >
+                        <ScrollViewer  >
+                            <StackPanel Margin="10" x:Name="ManualControl" Background="{x:Null}" >
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+                    </StackPanel>
+                <StackPanel x:Name="addByParameterPanel" Visibility="Collapsed">
+                    <Separator></Separator>
+                    <TextBlock FontSize="22" FontFamily="Segoe UI Semibold"  Margin="0,5,0,0">Dodaj Sterowanie Parametrem</TextBlock>
+                    <StackPanel Margin="0,15,0,0" Width="433" Orientation="Horizontal">
+                        <TextBlock FontSize="22" Width="200" FontFamily="Segoe UI"  Background="{x:Null}"  Foreground="Black" HorizontalAlignment="Left" >Nazwa Parametru:</TextBlock>
+                        <TextBox x:Name="parameterName" FontSize="22" Width="220" Margin="10,0,0,0"></TextBox>
+                    </StackPanel>
+                    <StackPanel Width="433" x:Name="Tolerancje">
+                        <StackPanel Margin="0,15,0,0" Orientation="Horizontal" x:Name="Tolerancje2D">
+                            <TextBlock FontSize="22" Width="200" FontFamily="Segoe UI" HorizontalAlignment="Left">Tolerowanie 2D:</TextBlock>
+                            <TextBox FontSize="22" Width="220" Margin="10,0,0,0" x:Name="parameterS2D"></TextBox>
+                        </StackPanel>
+                        <StackPanel Margin="0,15,0,0" Orientation="Horizontal" x:Name="Tolerancje3D">
+                            <TextBlock FontSize="22" Width="200" FontFamily="Segoe UI" HorizontalAlignment="Left">Tolerowanie 3D:</TextBlock>
+                                <TextBox FontSize="22" Width="220" Margin="10,0,0,0" x:Name="parameterS3D" ></TextBox>
+                        </StackPanel>
+                      </StackPanel>
+                    <StackPanel Margin="0,15,0,0" x:Name="jointsList" Width="433">
+                        <TextBlock FontSize="22" Width="303" FontFamily="Segoe UI Semibold"  Background="{x:Null}"   Foreground="Black" HorizontalAlignment="Left">Wybierz 3 współrzędne</TextBlock>
+                        <StackPanel Width="433" Margin="10" Orientation="Horizontal">
+                            <TextBlock FontSize="22" FontFamily="Segoe UI" Width="150" Margin="0,5,0,0" HorizontalAlignment="Left">Ramię</TextBlock>
+                            <CheckBox FontSize="22" Width="110" Height="25" Name="ShoulderLeft" Checked="selectJoint_Click">Lewy</CheckBox>
+                            <CheckBox FontSize="22" Width="110" Height="25" Name="ShoulderRight" Checked="selectJoint_Click">Prawy</CheckBox>
+                        </StackPanel>
+                        <StackPanel Width="433" Margin="10" Orientation="Horizontal">
+                            <TextBlock FontSize="22" FontFamily="Segoe UI" Width="150" Margin="0,5,0,0" HorizontalAlignment="Left">Łokieć</TextBlock>
+                            <CheckBox FontSize="22" Width="110" Height="25" Name="ElbowLeft" Checked="selectJoint_Click">Lewy</CheckBox>
+                            <CheckBox FontSize="22" Width="110" Height="25" Name="ElbowRight" Checked="selectJoint_Click">Prawy</CheckBox>
+                        </StackPanel>
+                        <StackPanel Width="433" Margin="10" Orientation="Horizontal">
+                            <TextBlock FontSize="22" FontFamily="Segoe UI" Width="150" Margin="0,5,0,0" HorizontalAlignment="Left">Nadgarstek</TextBlock>
+                            <CheckBox FontSize="22" Width="110" Height="25" Name="WristLeft" Checked="selectJoint_Click">Lewy</CheckBox>
+                            <CheckBox FontSize="22" Width="110" Height="25" Name="WristRight" Checked="selectJoint_Click">Prawy</CheckBox>
+                        </StackPanel>
+                        <StackPanel Width="433" Margin="10" Orientation="Horizontal">
+                            <TextBlock FontSize="22" FontFamily="Segoe UI" Width="150" Margin="0,5,0,0" HorizontalAlignment="Left">Ręka</TextBlock>
+                            <CheckBox FontSize="22" Width="110" Height="25" Name="HandLeft" Checked="selectJoint_Click">Lewy</CheckBox>
+                            <CheckBox FontSize="22" Width="110" Height="25" Name="HandRight" Checked="selectJoint_Click">Prawy</CheckBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Width="433" Margin="10" Orientation="Horizontal">
+                            <Button FontSize="20" Width="205" Height="44" Margin="5" VerticalAlignment="Center" Content="Dodaj"  Click="addByParameterAdd_Click"/>
+                            <Button FontSize="20" Width="205" Height="44" Margin="5" VerticalAlignment="Center" Content="Anuluj" Click="addByParameterCancel_Click"/>
+                        </StackPanel>
+                </StackPanel>
+                <ScrollViewer Height="510">
+                    <StackPanel x:Name="addByConstraintsPanel" Visibility="Collapsed">
+                        <Separator></Separator>
+                        <TextBlock FontSize="22" FontFamily="Segoe UI Semibold"  Margin="0,5,0,0">Dodaj Sterowanie Parametrem</TextBlock>
+                        <StackPanel Margin="0,15,0,0" Width="433" Orientation="Horizontal">
+                            <TextBlock FontSize="22" Width="200" FontFamily="Segoe UI"  Background="{x:Null}"  Foreground="Black" HorizontalAlignment="Left" >Wybierz Wiązanie:</TextBlock>
+                        </StackPanel>
+                    <TreeView x:Name="TreeViewConstraints" Background="{x:Null}" BorderThickness="0" SelectedItemChanged="selectedEvent_ItemChanged" Margin="10,10,0,0"></TreeView>
+                        <StackPanel Width="433" x:Name="Tolerancje_Constraints">
+                            <StackPanel Margin="0,15,0,0" Orientation="Horizontal" x:Name="Tolerancje2D_Constraints">
+                                <TextBlock FontSize="22" Width="200" FontFamily="Segoe UI" HorizontalAlignment="Left">Tolerowanie 2D:</TextBlock>
+                                <TextBox FontSize="22" Width="220" Margin="10,0,0,0" x:Name="parameterS2D_Constraints"></TextBox>
+                            </StackPanel>
+                            <StackPanel Margin="0,15,0,0" Orientation="Horizontal" x:Name="Tolerancje3D_Constraints">
+                                <TextBlock FontSize="22" Width="200" FontFamily="Segoe UI" HorizontalAlignment="Left">Tolerowanie 3D:</TextBlock>
+                                <TextBox FontSize="22" Width="220" Margin="10,0,0,0" x:Name="parameterS3D_Constraints" ></TextBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Margin="0,15,0,0" x:Name="jointsList_Constraints" Width="433">
+                            <TextBlock FontSize="22" Width="303" FontFamily="Segoe UI Semibold"  Background="{x:Null}" Foreground="Black" HorizontalAlignment="Left">Wybierz 3 współrzędne</TextBlock>
+                            <StackPanel Width="433" Margin="5" Orientation="Horizontal">
+                                <TextBlock FontSize="22" FontFamily="Segoe UI" Width="150" Margin="0,5,0,0" HorizontalAlignment="Left">Ramię</TextBlock>
+                                <CheckBox FontSize="22" Width="110" Height="25" Name="ShoulderLeft_Constraints" Checked="selectJoint_Constraints_Click">Lewy</CheckBox>
+                                <CheckBox FontSize="22" Width="110" Height="25" Name="ShoulderRight_Constraints" Checked="selectJoint_Constraints_Click">Prawy</CheckBox>
+                            </StackPanel>
+                            <StackPanel Width="433" Margin="5" Orientation="Horizontal">
+                                <TextBlock FontSize="22" FontFamily="Segoe UI" Width="150" Margin="0,5,0,0" HorizontalAlignment="Left">Łokieć</TextBlock>
+                                <CheckBox FontSize="22" Width="110" Height="25" Name="ElbowLeft_Constraints" Checked="selectJoint_Constraints_Click">Lewy</CheckBox>
+                                <CheckBox FontSize="22" Width="110" Height="25" Name="ElbowRight_Constraints" Checked="selectJoint_Constraints_Click">Prawy</CheckBox>
+                            </StackPanel>
+                            <StackPanel Width="433" Margin="5" Orientation="Horizontal">
+                                <TextBlock FontSize="22" FontFamily="Segoe UI" Width="150" Margin="0,5,0,0" HorizontalAlignment="Left">Nadgarstek</TextBlock>
+                                <CheckBox FontSize="22" Width="110" Height="25" Name="WristLeft_Constraints" Checked="selectJoint_Constraints_Click">Lewy</CheckBox>
+                                <CheckBox FontSize="22" Width="110" Height="25" Name="WristRight_Constraints" Checked="selectJoint_Constraints_Click">Prawy</CheckBox>
+                            </StackPanel>
+                            <StackPanel Width="433" Margin="5" Orientation="Horizontal">
+                                <TextBlock FontSize="22" FontFamily="Segoe UI" Width="150" Margin="0,5,0,0" HorizontalAlignment="Left">Ręka</TextBlock>
+                                <CheckBox FontSize="22" Width="110" Height="25" Name="HandLeft_Constraints" Checked="selectJoint_Constraints_Click">Lewy</CheckBox>
+                                <CheckBox FontSize="22" Width="110" Height="25" Name="HandRight_Constraints" Checked="selectJoint_Constraints_Click">Prawy</CheckBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Width="433" Margin="10,0,10,10" Orientation="Horizontal">
+                            <Button FontSize="20" Width="205" Margin="5" VerticalAlignment="Center" Content="Dodaj" Click="addByConstraintsAdd_Click"/>
+                            <Button FontSize="20" Width="205" Margin="5" VerticalAlignment="Center" Content="Anuluj" Click="addByConstrinsCancel_Click" />
+                        </StackPanel>
+                </StackPanel>
+                </ScrollViewer >
+
+            </StackPanel>
+        </Grid>
+    </Viewbox>
+</Window>
